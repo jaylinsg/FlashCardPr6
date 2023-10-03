@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeoQuiz">
         <activity
-            android:name=".CheatActivity"
+            android:name=".FlashCardActivity"
             android:exported="false" />
         <activity
-            android:name=".`LoginActivity.kt`"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

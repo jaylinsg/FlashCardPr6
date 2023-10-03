@@ -1,5 +1,5 @@
 package com.bignerdranch.android.geoquiz
-
+/*
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
@@ -36,3 +36,4 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         currentIndex = (currentIndex + 1) % questionBank.size
     }
 }
+*/
