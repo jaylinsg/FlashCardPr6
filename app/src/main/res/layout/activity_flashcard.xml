@@ -18,6 +18,9 @@
         android:id="@+id/generate_flashcards_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate 10 Random Problems" />
+        android:text="@string/generate_button_text"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
 
 </LinearLayout>

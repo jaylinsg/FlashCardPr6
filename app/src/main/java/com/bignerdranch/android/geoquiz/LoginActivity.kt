@@ -1,5 +1,6 @@
 package com.bignerdranch.android.geoquiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     // Assuming you have a hardcoded username and password
-    private val hardcodedUsername = "exampleUsername"
-    private val hardcodedPassword = "examplePassword"
+    private val hardcodedUsername = "Username"
+    private val hardcodedPassword = "Password"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun displayWelcomeMessage(username: String) {
         Toast.makeText(this, "Welcome $username", Toast.LENGTH_SHORT).show()
-        // TODO: Navigate to the FlashCardActivity here
+
+        // Create an intent to start the FlashCardActivity and pass the username
+        val intent = Intent(this, FlashCardActivity::class.java).apply {
+            putExtra("USERNAME", username)
+        }
+
+        // Start the FlashCardActivity
+        startActivity(intent)
+
+        // Finish the current activity (LoginActivity)
+        finish()
     }
+
 }
 
