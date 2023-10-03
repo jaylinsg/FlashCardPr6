@@ -35,16 +35,21 @@ class FlashCardActivity : AppCompatActivity() {
             Toast.makeText(this, "Welcome $username", Toast.LENGTH_SHORT).show()
         }
     }
-//
-
+    private var currentProblemIndex: Int = 0
+    private val problems = mutableListOf<String>()
+    private var userAnswers = mutableListOf<Int>()
     // Inside the generateProblems() function
     private fun generateProblems() {
-        // Generate 10 random problems with approximately half addition and half subtraction
-        val problems = generateRandomProblems(10)
-        displayProblems(problems)
+        // Reset variables for a new game
+        currentProblemIndex = 0
+        problems.clear()
+        userAnswers.clear()
 
-        // Enable the Generate button after generating problems
-        generateButton.isEnabled = true
+        // Generate 10 random problems with approximately half addition and half subtraction
+        problems.addAll(generateRandomProblems(10))
+
+        // Display the first problem
+        displayNextProblem()
     }
 
 
@@ -69,16 +74,51 @@ class FlashCardActivity : AppCompatActivity() {
         return problems
     }
 
-    private fun displayProblems(problems: List<String>) {
-        val message = problems.joinToString("\n")
-        binding.flashcardTextView.text = message
+    // Display the next problem
+    private fun displayNextProblem() {
+        if (currentProblemIndex < problems.size) {
+            binding.flashcardTextView.text = problems[currentProblemIndex]
+            currentProblemIndex++
+        } else {
+            // All problems answered, calculate the score and display a Toast
+            calculateScore()
+        }
     }
 
     // Add a method to calculate the score
     private fun calculateScore() {
-        // Dummy calculation: half the problems correct
-        score = Random.Default.nextInt(0, 11) * 2
-        Toast.makeText(this, "Score: $score out of 10", Toast.LENGTH_SHORT).show()
+        var correctAnswers = 0
+
+        // Calculate correct answers
+        for (i in 0 until problems.size) {
+            val answer = userAnswers.getOrNull(i)
+            if (answer != null && evaluateAnswer(problems[i], answer)) {
+                correctAnswers++
+            }
+        }
+
+        val scoreMessage = "Score: $correctAnswers out of ${problems.size}"
+        Toast.makeText(this, scoreMessage, Toast.LENGTH_SHORT).show()
+
+        // Reset the game for a new round
+        generateButton.isEnabled = true
+        generateButton.text = getString(R.string.generate_button_text)
+    }
+
+    // Evaluate the answer for a problem
+    private fun evaluateAnswer(problem: String, userAnswer: Int): Boolean {
+        val regex = "(\\d+) ([+-]) (\\d+) = \\?".toRegex()
+        val matchResult = regex.find(problem)
+
+        if (matchResult != null) {
+            val (operand1, operator, operand2) = matchResult.destructured
+            return when (operator) {
+                "+" -> operand1.toInt() + operand2.toInt() == userAnswer
+                "-" -> operand1.toInt() - operand2.toInt() == userAnswer
+                else -> false
+            }
+        }
+        return false
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

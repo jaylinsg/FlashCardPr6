@@ -4,4 +4,6 @@
     <string name="password_hint">Password</string>
     <string name="login_button_text">Login</string>
     <string name="generate_button_text">Generate 10 Random Problems</string>
+    <string name="warning_text">Your warning text here</string>
+    <string name="show_answer_button">Show Answer</string>
 </resources>

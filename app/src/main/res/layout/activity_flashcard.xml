@@ -14,6 +14,20 @@
         android:padding="24dp"
         tools:text="Flashcard Content" />
 
+    <EditText
+        android:id="@+id/answer_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your answer"
+        android:padding="16dp"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
     <Button
         android:id="@+id/generate_flashcards_button"
         android:layout_width="wrap_content"
