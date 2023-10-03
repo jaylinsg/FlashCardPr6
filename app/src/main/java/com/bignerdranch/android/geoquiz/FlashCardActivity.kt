@@ -35,7 +35,7 @@ class FlashCardActivity : AppCompatActivity() {
             Toast.makeText(this, "Welcome $username", Toast.LENGTH_SHORT).show()
         }
     }
-
+//
 
     // Inside the generateProblems() function
     private fun generateProblems() {
